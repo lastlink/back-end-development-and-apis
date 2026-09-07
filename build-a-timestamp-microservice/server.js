@@ -22,6 +22,14 @@ app.get("/api{/:date}", (req, res) => {
     parsedDate = new Date(Number(date));
   } else {
     parsedDate = new Date(date);
+
+    if (!/(?:z|[+-]\d{2}:?\d{2})$/i.test(date.trim())) {
+      const asUtc = new Date(`${date} UTC`);
+
+      if (!Number.isNaN(asUtc.getTime())) {
+        parsedDate = asUtc;
+      }
+    }
   }
 
   if (parsedDate.toString() === "Invalid Date") {
