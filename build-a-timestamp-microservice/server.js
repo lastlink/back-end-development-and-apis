@@ -11,9 +11,25 @@ app.get("/", (_req, res) => {
   res.sendFile(import.meta.dirname + "/views/index.html");
 });
 
-// Do not change code above this line
+app.get("/api{/:date}", (req, res) => {
+  const { date } = req.params;
 
-// Do not change code below this line
+  let parsedDate;
+
+  if (!date) {
+    parsedDate = new Date();
+  } else if (/^\d+$/.test(date)) {
+    parsedDate = new Date(Number(date));
+  } else {
+    parsedDate = new Date(date);
+  }
+
+  if (parsedDate.toString() === "Invalid Date") {
+    return res.json({ error: "Invalid Date" });
+  }
+
+  res.json({ unix: parsedDate.getTime(), utc: parsedDate.toUTCString() });
+});
 
 const PORT = 8000;
 const listener = app.listen(PORT, function () {

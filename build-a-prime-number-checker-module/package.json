@@ -1,0 +1,13 @@
+{
+  "name": "prime-checker",
+  "version": "1.0.0",
+  "description": "A module that checks whether a given number is prime.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.test.js"
+  },
+  "keywords": ["prime", "number", "checker"],
+  "author": "lastlink",
+  "license": "MIT",
+  "type": "commonjs"
+}
